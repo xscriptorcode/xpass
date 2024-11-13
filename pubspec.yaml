@@ -1,0 +1,25 @@
+name: xpass
+description: "A new Flutter project."
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Dependencies for secure storage and cryptography
+  flutter_secure_storage: ^8.0.0 # Para almacenamiento seguro
+  xkyber_crypto: ^1.0.0          # Cambia a la versión correcta de xkyber_crypto
+  cupertino_icons: ^1.0.8        # Para iconos de iOS
+  local_auth: ^2.3.0
+  encrypt: ^5.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
