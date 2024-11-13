@@ -1,22 +1,30 @@
+import 'package:xpass/auth/login_or_register.dart';
+import 'package:xpass/themes/light_mode.dart';
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
-import 'services/secure_storage_service.dart';
+import 'package:xpass/themes/theme_provider.dart';
+import 'package:xpass/themes/dark_mode.dart'; 
+import 'package:provider/provider.dart';
 
-void main() async {
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await SecureStorageService.initializeKeys(); // Inicializa las claves al iniciar la app
-  runApp(PasswordManagerApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
-class PasswordManagerApp extends StatelessWidget {
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Password Manager',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+      home: const LoginOrRegister(),
+      theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }

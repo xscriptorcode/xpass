@@ -1,25 +1,48 @@
 name: xpass
-description: "A new Flutter project."
+description: "Xpass es una aplicación de gestión de contraseñas."
 publish_to: 'none'
-
-
-version: 1.0.0+1
+version: 0.1.0
 
 environment:
-  sdk: ^3.5.4
-
+  sdk: '>=3.4.4 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-
-  # Dependencies for secure storage and cryptography
-  flutter_secure_storage: ^8.0.0 # Para almacenamiento seguro
-  xkyber_crypto: ^1.0.0          # Cambia a la versión correcta de xkyber_crypto
-  cupertino_icons: ^1.0.8        # Para iconos de iOS
-  local_auth: ^2.3.0
-  encrypt: ^5.0.0
+  path_provider: ^2.0.14
+  permission_handler: ^11.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  provider: ^6.1.2
+  flutter_local_notifications: ^17.2.2
+  encrypt: ^5.0.1
+  google_fonts: ^6.2.1
+  cryptography: ^2.7.0
+  pointycastle: ^3.9.1
+  asn1lib: ^1.0.0
+  file_picker: ^5.2.3
+  sqflite: ^2.3.3+1
+  shared_preferences: ^2.0.13
+  image_picker: ^0.8.5+3
+    
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icon.png" 
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - icon.png
+
+
+
+  

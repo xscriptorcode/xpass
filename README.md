@@ -1,16 +1,62 @@
-# xpass
+# Xpass
 
-A new Flutter project.
+Xpass además de ser una prueba de uso de xKyber_crypto para cifrado avanzado, es una aplicación de gestión de contraseñas segura y fácil de usar. La aplicación permite a los usuarios almacenar, ver, editar y eliminar contraseñas de manera confidencial, aprovechando técnicas avanzadas de cifrado para proteger la información almacenada. Xpass también permite la creación de sesiones de usuario con autenticación y cuenta con una interfaz intuitiva y personalizable.
 
-## Getting Started
+## Características
+- **Almacenamiento Seguro de Contraseñas**: Las contraseñas se almacenan en una base de datos cifrada para garantizar la privacidad y seguridad de los datos.
+- **Autenticación y Sesiones de Usuario**: Los usuarios pueden crear sesiones con un código de acceso y contraseña personalizada.
+- **Gestión de Contraseñas**: Posibilidad de crear, editar, copiar y eliminar contraseñas con facilidad.
+- **Exportación de Sesión**: Los usuarios pueden exportar e importar archivos de sesión para iniciar sesión rápidamente en otros dispositivos.
+- **Interfaz Elegante y Funcional**: Interfaz minimalista que facilita la navegación y el uso de la aplicación, con accesos directos para copiar y eliminar contraseñas.
 
-This project is a starting point for a Flutter application.
+## Requisitos Previos
+- **Flutter**: Versión 2.10 o superior.
+- **Dart**: Versión 2.16 o superior.
+- **Permisos de Android**: La aplicación solicita permisos de almacenamiento en dispositivos Android 11 o superior para poder gestionar archivos de sesión.
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Clonar el Repositorio**:
+   ```bash
+   git clone https://github.com/usuario/xpass.git
+   cd xpass
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. **Instalar las Dependencias**:
+
+```bash
+flutter pub get
+```
+
+3. **Ejecutar la Aplicación: Para probar la aplicación en un emulador o dispositivo físico, ejecuta**:
+
+```bash
+flutter run
+```
+
+## Estructura del proyecto
+
+lib/
+├── auth/
+│   ├── login_manager.dart        # Lógica para gestionar el inicio de sesión
+│   ├── register_page_logic.dart  # Lógica para gestionar el registro
+├── components/
+│   ├── my_button.dart            # Componente de botón reutilizable
+│   └── my_textfield.dart         # Componente de campo de texto reutilizable
+├── crypto/                       # Xkyber y cifrado
+├── pages/                        # Pantallas
+│   ├── login_page.dart
+│   ├── register_page.dart
+│   ├── password/
+│   ├── settings/
+├── themes/                       # Configuración de temas
+└── utils/                        # Utilidades y helpers generales
+    ├── bd/                       # Base de datos cifrada
+    ├── file_manager.dart         # Lógica de gestión de archivos
+
+
+Uso:
+1. Registro de Usuario: Al abrir la aplicación por primera vez, crea una sesión mediante un código de acceso y contraseña.
+
+2. Gestión de Contraseñas: Desde la pantalla principal, puedes ver todas tus contraseñas guardadas. También puedes crear nuevas contraseñas, editarlas o eliminarlas.
+
+3. Exportación/Importación de Sesión: Accede a la opción de importar archivo de sesión desde la pantalla de inicio de sesión.
