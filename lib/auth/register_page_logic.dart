@@ -1,8 +1,5 @@
-// lib/auth/register_page_logic.dart
-
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:xpass/crypto/kyber_keypair.dart';
@@ -11,34 +8,28 @@ import 'package:xpass/utils/file_manager.dart';
 import 'package:xpass/crypto/coefficients_codec.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xpass/utils/encryption_utils.dart' as encrut;
+import 'package:xpass/utils/bd/database_helper.dart';
 
-// Función para eliminar cualquier sesión anterior, incluyendo archivos de base de datos y alias
 Future<void> clearPreviousSession() async {
   final fileManager = FileManager();
+  final dbHelper = DatabaseHelper();
 
-  // 1. Eliminar el archivo de sesión anterior, si existe
+  // 1. Reinicia la base de datos para eliminar cualquier dato residual
+  await dbHelper.resetDatabase();
+
+  // 2. Eliminar archivo de sesión si existe
   String sessionFilePath = await fileManager.getVerificationFilePath();
   final sessionFile = File(sessionFilePath);
   if (await sessionFile.exists()) {
     await sessionFile.delete();
   }
 
-  // 2. Eliminar la base de datos creada en sesiones anteriores, si existe
-  String dbPath = await getDatabasesPath();
-  String databaseName = 'password_database.db';
-  String fullDbPath = '$dbPath/$databaseName';
-
-  final dbFile = File(fullDbPath);
-  if (await dbFile.exists()) {
-    await deleteDatabase(fullDbPath); // Elimina la base de datos completa
-  }
-
-  // 3. Eliminar el archivo de perfil `profile.enc`, si existe
+  // 3. Eliminar el archivo de perfil `profile.enc` si existe
   String xSessionsPath = await fileManager.getXSessionsPath();
   String profileFilePath = '$xSessionsPath/profile.enc';
   final profileFile = File(profileFilePath);
   if (await profileFile.exists()) {
-    await profileFile.delete(); // Elimina el archivo de alias e imagen
+    await profileFile.delete();
   }
 }
 
@@ -71,7 +62,6 @@ Future<void> saveSessionWithKeys(String dataToSave, KyberKeyPair keyPair, [Strin
   await file.writeAsString(jsonSessionData);
 }
 
-// Guarda el alias en `profile.enc`
 Future<void> saveAlias(String alias) async {
   final fileManager = FileManager();
   final secretKey = await encrut.generateSecretKey();
@@ -110,16 +100,12 @@ void register(
   }
 
   try {
-    // Borra cualquier sesión anterior y base de datos antes de guardar la nueva
     await clearPreviousSession();
 
     final keyPair = KyberKeyPair.generate();
     String dataToSave = '$password:$code';
 
-    // Guarda la sesión junto con el alias predeterminado "X" si no se proporciona uno
     await saveSessionWithKeys(dataToSave, keyPair, alias ?? "X");
-
-    // Guarda el alias en el archivo profile.enc (con alias "X" si no se proporciona)
     await saveAlias(alias ?? "X");
 
     if (!context.mounted) return;

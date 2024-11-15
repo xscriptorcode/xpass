@@ -1,5 +1,3 @@
-// lib/pages/settings_page.dart
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +7,7 @@ import 'package:xpass/pages/settings/change_password_page.dart';
 import 'package:xpass/themes/theme_provider.dart';
 import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/utils/file_manager.dart';
+import 'package:file_picker/file_picker.dart'; // Importar para permitir la selección de directorios
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -123,6 +122,41 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
+  Future<void> _exportSessionFile() async {
+    try {
+      final fileManager = FileManager();
+      String sessionFilePath = await fileManager.getVerificationFilePath();
+
+      // Verificar si el archivo de sesión existe
+      final sessionFile = File(sessionFilePath);
+      if (!await sessionFile.exists()) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No hay archivo de sesión para exportar.')),
+        );
+        return;
+      }
+
+      // Seleccionar directorio para guardar el archivo
+      String? outputDirectory = await FilePicker.platform.getDirectoryPath();
+      if (outputDirectory == null) {
+        // El usuario canceló la selección
+        return;
+      }
+
+      // Copiar el archivo al directorio seleccionado
+      String fileName = sessionFile.uri.pathSegments.last;
+      await sessionFile.copy('$outputDirectory/$fileName');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Archivo de sesión exportado exitosamente.')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al exportar el archivo de sesión: $e')),
+      );
+    }
+  }
+
   void _editAlias() {
     final controller = TextEditingController(text: _alias);
     showDialog(
@@ -208,6 +242,12 @@ class _SettingsPageState extends State<SettingsPage> {
               onChanged: (value) {
                 _toggleTheme();
               },
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: _exportSessionFile,
+              icon: const Icon(Icons.upload_file),
+              label: const Text('Exportar Archivo de Sesión'),
             ),
           ],
         ),
