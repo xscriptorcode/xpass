@@ -1,12 +1,14 @@
-// lib/pages/password/password_list_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:xpass/pages/password/add_password_screen.dart';
+import 'package:xpass/pages/password/export_passwords_page.dart';
+import 'package:xpass/pages/password/import_passwords_page.dart';
 import 'package:xpass/utils/bd/database_helper.dart';
 import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/pages/password/password.dart';
 import 'package:xpass/pages/password/passwords_screen.dart';
 import 'package:xpass/pages/settings/settings_page.dart';
+import 'package:xpass/pages/password/export_passwords_page.dart'; // Nueva página para exportar contraseñas
+import 'package:xpass/pages/password/import_passwords_page.dart'; // Nueva página para importar contraseñas
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpass/auth/login_or_register.dart';
 import 'package:flutter/services.dart'; // Para el portapapeles
@@ -120,6 +122,28 @@ class _PasswordListScreenState extends State<PasswordListScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AddPasswordScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.upload_file),
+              title: const Text('Exportar Contraseñas'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ExportPasswordsPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.download),
+              title: const Text('Importar Contraseñas'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ImportPasswordsPage()),
                 );
               },
             ),

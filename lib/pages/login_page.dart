@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:xpass/components/my_button.dart';
 import 'package:xpass/components/my_textfield.dart';
 import 'package:xpass/auth/login_manager.dart';
-import 'dart:io';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -21,13 +20,13 @@ class _LoginPageState extends State<LoginPage> {
   final LoginManager _loginManager = LoginManager();
 
   // Método de inicio de sesión
-  void login(BuildContext context, {File? selectedFile}) {
-    _loginManager.login(context, _codeController.text, _passwordController.text, selectedFile);
+  void login(BuildContext context) {
+    _loginManager.login(context, _codeController.text, _passwordController.text);
   }
 
-  // Método para importar archivo de sesión manualmente
-  Future<void> importSessionFile(BuildContext context) async {
-    _loginManager.importSessionFile(context, _codeController.text, _passwordController.text);
+  // Navegar a la nueva página para importar archivo de sesión
+  void navigateToImportSessionPage(BuildContext context) {
+    _loginManager.navigateToImportSession(context, _codeController.text, _passwordController.text);
   }
 
   @override
@@ -35,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
-        child: SingleChildScrollView( // Hacemos todo el contenido scrollable
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(16), // Espaciado alrededor del contenido
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 400),
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 10),
                     MyButton(
                       text: "Importar archivo de sesión",
-                      onTap: () => importSessionFile(context),
+                      onTap: () => navigateToImportSessionPage(context),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -97,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: widget.onTap, // Asegura que widget.onTap esté disponible
+                          onTap: widget.onTap,
                           child: Text(
                             " Regístrate",
                             style: TextStyle(

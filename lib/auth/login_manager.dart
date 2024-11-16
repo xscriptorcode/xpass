@@ -1,5 +1,4 @@
 // lib/auth/login_manager.dart
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -11,9 +10,9 @@ import 'package:xpass/crypto/kyber_logic.dart';
 import 'package:xpass/crypto/kyber_keypair.dart';
 import 'package:xpass/crypto/polynomial.dart';
 import 'package:xpass/crypto/coefficients_codec.dart';
+import 'package:xpass/auth/import_session_page.dart';
 
 Uint8List decodeFromBase64(String base64Str) {
-  // No usar directamente Uint8List.fromList, usar decodeCoefficients
   List<int> coefficients = decodeCoefficients(base64Str);
   return Uint8List.fromList(coefficients);
 }
@@ -46,7 +45,6 @@ class LoginManager {
         Polynomial(decodeCoefficients(jsonData['privateKey'] as String)),
       );
 
-      // Verifica que las claves no estén vacías
       if (keyPair.publicKey.coefficients.isEmpty || keyPair.privateKey.coefficients.isEmpty) {
         _showSnackBar(context, 'Claves cargadas están vacías.');
         return;
@@ -73,7 +71,7 @@ class LoginManager {
         _showSnackBar(context, 'Inicio de sesión exitoso');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PasswordListScreen()),
+          MaterialPageRoute(builder: (context) => const PasswordListScreen()),
         );
       } else {
         _showSnackBar(context, 'Código o contraseña incorrectos');
@@ -83,24 +81,17 @@ class LoginManager {
     }
   }
 
-  Future<void> importSessionFile(BuildContext context, String code, String password) async {
-    final permissionGranted = await permissionManager.requestStoragePermission();
-
-    if (!permissionGranted) {
-      _showSnackBar(context, 'Permiso de almacenamiento denegado.');
-      return;
-    }
-
-    try {
-      File? selectedFile = await fileManager.pickSessionFile();
-      if (selectedFile != null) {
-        login(context, code, password, selectedFile);
-      } else {
-        _showSnackBar(context, 'No se seleccionó ningún archivo.');
-      }
-    } catch (e) {
-      _showSnackBar(context, 'Error inesperado: $e');
-    }
+  // Navegar a la página de importar sesión y pasar el código y contraseña de inicio de sesión
+  void navigateToImportSession(BuildContext context, String code, String password) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImportSessionPage(
+          loginCode: code,
+          loginPassword: password,
+        ),
+      ),
+    );
   }
 
   void _showSnackBar(BuildContext context, String message) {
