@@ -1,43 +1,107 @@
-# Xpass
+# **Xpass**
 
-Xpass además de ser una prueba de uso de xKyber_crypto para cifrado avanzado, es una aplicación de gestión de contraseñas segura y fácil de usar. La aplicación permite a los usuarios almacenar, ver, editar y eliminar contraseñas de manera confidencial, aprovechando técnicas avanzadas de cifrado para proteger la información almacenada. Xpass también permite la creación de sesiones de usuario con autenticación y cuenta con una interfaz intuitiva y personalizable.
+Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil completa que utiliza criptografía avanzada, incluido **Kyber**, para ofrecer una seguridad de última generación. ¡Ideal para usuarios que buscan mantener sus datos protegidos contra accesos no autorizados!
 
-## Características
-- **Almacenamiento Seguro de Contraseñas**: Las contraseñas se almacenan en una base de datos cifrada para garantizar la privacidad y seguridad de los datos.
-- **Autenticación y Sesiones de Usuario**: Los usuarios pueden crear sesiones con un código de acceso y contraseña personalizada.
-- **Gestión de Contraseñas**: Posibilidad de crear, editar, copiar y eliminar contraseñas con facilidad.
-- **Exportación de Sesión**: Los usuarios pueden exportar e importar archivos de sesión para iniciar sesión rápidamente en otros dispositivos.
-- **Interfaz Elegante y Funcional**: Interfaz minimalista que facilita la navegación y el uso de la aplicación, con accesos directos para copiar y eliminar contraseñas.
+---
 
-## Requisitos Previos
-- **Flutter**: Versión 2.10 o superior.
-- **Dart**: Versión 2.16 o superior.
-- **Permisos de Android**: La aplicación solicita permisos de almacenamiento en dispositivos Android 11 o superior para poder gestionar archivos de sesión.
+## **Funciones**
 
-## Instalación
+### **1. Gestión de Contraseñas**
+- **Agregar, Editar y Eliminar Contraseñas**: Administra tus contraseñas de manera sencilla para diferentes plataformas y servicios.
+- **Cifrado Avanzado**: Cada contraseña se cifra de manera segura antes de almacenarse.
+- **Generador de Contraseñas Seguras**: Genera contraseñas aleatorias y robustas para garantizar la seguridad de tus cuentas.
 
+### **2. Uso de Criptografía Kyber**
+- **Algoritmo Post-Cuántico**: Kyber es un algoritmo de cifrado resistente a ataques cuánticos, utilizado en la aplicación para generar claves compartidas seguras.
+- **Cifrado y Descifrado Seguro**: Los datos sensibles, como contraseñas y sesiones de usuario, están protegidos con claves generadas mediante Kyber, proporcionando un nivel de seguridad superior.
+- **Claves Compartidas**: Se utiliza Kyber para generar claves compartidas entre las sesiones del usuario, asegurando que los datos se mantengan seguros incluso en entornos no confiables.
+
+### **3. Importar y Exportar Contraseñas**
+- **Exportar Contraseñas**:
+  - Exporta tus contraseñas cifradas a un archivo protegido por contraseña.
+  - Selecciona un directorio para guardar tus contraseñas cifradas.
+- **Importar Contraseñas**:
+  - Restaura tus contraseñas desde un archivo cifrado usando la contraseña que utilizaste para exportarlas.
+  - Compatible con múltiples dispositivos y sesiones de usuario.
+- **Cifrado con Contraseña**: Se añade una capa adicional de seguridad al cifrar los datos exportados con una contraseña proporcionada por el usuario.
+
+### **4. Gestión del Perfil del Usuario**
+- **Alias Personalizado**: Configura y edita un alias para personalizar tu experiencia en la aplicación.
+- **Foto de Perfil**: Subir y cambiar tu foto de perfil fácilmente desde la galería.
+- **Datos Cifrados**: Toda la información del perfil se guarda de forma segura en archivos cifrados.
+
+### **5. Seguridad Avanzada**
+- **Cifrado AES-256 y Kyber**: Combina algoritmos tradicionales con criptografía post-cuántica para una doble capa de seguridad.
+- **Gestión Segura de Sesiones**: Las sesiones de usuario se administran utilizando claves generadas dinámicamente.
+- **Recuperación Segura**: Permite restaurar datos importando archivos cifrados.
+
+### **6. Personalización y Configuración**
+- **Modo Oscuro**: Alterna entre los modos claro y oscuro según tu preferencia.
+- **Cambio de Contraseña**: Modifica tu contraseña principal directamente desde la configuración.
+- **Exportación de Sesión**: Exporta los datos de sesión de forma segura para respaldo o migración.
+
+---
+
+## **Tecnologías Utilizadas**
+- **Framework**: Flutter
+- **Lenguaje de Programación**: Dart
+- **Base de Datos**: SQLite para almacenamiento local
+- **Criptografía**:
+  - **xKyber**: Algoritmo de cifrado basado en Kyber, cifrado post-cuántico, para la generación de claves seguras.
+  - **AES-256**: Estándar de cifrado avanzado para proteger datos sensibles.
+  - **SHA-256**: Derivación de claves desde contraseñas proporcionadas por el usuario.
+- **Gestión de Archivos**: Manejo de archivos locales para exportación, importación y almacenamiento seguro.
+
+---
+
+## **Instalación**
 1. **Clonar el Repositorio**:
    ```bash
-   git clone https://github.com/xscriptorcode/xpass.git
-   cd xpass
+   git clone https://github.com/tuusuario/gestor-de-contrasenas.git
+   cd gestor-de-contrasenas
+   ```
 
-2. **Instalar las Dependencias**:
+2. **Instalar Dependencias**:
+   ```bash
+   flutter pub get
+   ```
 
-```bash
-flutter pub get
-```
+3. **Ejecutar la Aplicación**:
+   ```bash
+   flutter run
+   ```
 
-3. **Ejecutar la Aplicación: Para probar la aplicación en un emulador o dispositivo físico, ejecuta**:
+---
 
-```bash
-flutter run
-```
+## **Cómo Usar**
 
+### **Configuración Inicial**
+1. Regístrate en la aplicación con un código único y una contraseña segura.
+2. Configura tu alias y sube tu foto de perfil para personalizar tu cuenta.
 
+### **Gestión de Contraseñas**
+1. **Agregar Contraseñas**:
+   - Desde la lista de contraseñas, presiona el botón **+** y selecciona "Nueva Contraseña".
+   - Completa los campos y guarda.
+2. **Exportar Contraseñas**:
+   - Desde el menú, selecciona "Exportar Contraseñas".
+   - Define una contraseña para cifrar el archivo y elige un directorio de exportación.
+3. **Importar Contraseñas**:
+   - Desde el menú, selecciona "Importar Contraseñas".
+   - Selecciona el archivo exportado, introduce la contraseña y restaura las contraseñas.
 
-### Uso:
-1. Registro de Usuario: Al abrir la aplicación por primera vez, crea una sesión mediante un código de acceso y contraseña.
+### **Configuración del Usuario**
+1. Edita tu alias o sube una nueva foto desde la sección de configuración.
+2. Cambia la contraseña de la aplicación desde la misma sección.
 
-2. Gestión de Contraseñas: Desde la pantalla principal, puedes ver todas tus contraseñas guardadas. También puedes crear nuevas contraseñas, editarlas o eliminarlas.
+---
 
-3. Exportación/Importación de Sesión: Accede a la opción de importar archivo de sesión desde la pantalla de inicio de sesión.
+## **Contribuciones**
+Contribuciones son bienvenidas. Si encuentras un error o tienes sugerencias, por favor abre un issue o envía un pull request.
+
+---
+
+## **Licencia**
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
