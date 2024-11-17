@@ -18,7 +18,7 @@ Xpass además de ser una prueba de uso de xKyber_crypto para cifrado avanzado, e
 
 1. **Clonar el Repositorio**:
    ```bash
-   git clone https://github.com/usuario/xpass.git
+   git clone https://github.com/xscriptorcode/xpass.git
    cd xpass
 
 2. **Instalar las Dependencias**:
@@ -33,28 +33,9 @@ flutter pub get
 flutter run
 ```
 
-## Estructura del proyecto
-
-lib/
-├── auth/
-│   ├── login_manager.dart        # Lógica para gestionar el inicio de sesión
-│   ├── register_page_logic.dart  # Lógica para gestionar el registro
-├── components/
-│   ├── my_button.dart            # Componente de botón reutilizable
-│   └── my_textfield.dart         # Componente de campo de texto reutilizable
-├── crypto/                       # Xkyber y cifrado
-├── pages/                        # Pantallas
-│   ├── login_page.dart
-│   ├── register_page.dart
-│   ├── password/
-│   ├── settings/
-├── themes/                       # Configuración de temas
-└── utils/                        # Utilidades y helpers generales
-    ├── bd/                       # Base de datos cifrada
-    ├── file_manager.dart         # Lógica de gestión de archivos
 
 
-Uso:
+### Uso:
 1. Registro de Usuario: Al abrir la aplicación por primera vez, crea una sesión mediante un código de acceso y contraseña.
 
 2. Gestión de Contraseñas: Desde la pantalla principal, puedes ver todas tus contraseñas guardadas. También puedes crear nuevas contraseñas, editarlas o eliminarlas.
