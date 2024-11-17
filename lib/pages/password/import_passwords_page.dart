@@ -49,7 +49,10 @@ class _ImportPasswordsPageState extends State<ImportPasswordsPage> {
 
     try {
       // Leer el contenido del archivo seleccionado
-      final encryptedContent = await _selectedFile!.readAsString();
+      final base64EncodedContent = await _selectedFile!.readAsString();
+
+      // Decodificar de Base64
+      final encryptedContent = utf8.decode(base64Decode(base64EncodedContent));
 
       // Derivar clave secreta de la contraseña proporcionada
       final passwordSecretKey = deriveKey(_passwordController.text);

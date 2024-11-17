@@ -70,10 +70,13 @@ class _ExportPasswordsPageState extends State<ExportPasswordsPage> {
       // Cifrar los datos
       final encryptedContent = await encryptData(jsonPasswords, passwordSecretKey);
 
+      // Codificar en Base64 antes de guardar
+      final base64EncodedContent = base64Encode(utf8.encode(encryptedContent));
+
       // Guardar el archivo cifrado
-      final fileName = 'exported_passwords.enc';
+      const fileName = 'exported_passwords.enc';
       final File file = File('$_outputDirectory/$fileName');
-      await file.writeAsString(encryptedContent);
+      await file.writeAsString(base64EncodedContent);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Contraseñas exportadas exitosamente.')),

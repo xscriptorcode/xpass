@@ -8,6 +8,7 @@ import 'package:xpass/pages/settings/export_session_page.dart';
 import 'package:xpass/themes/theme_provider.dart';
 import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/utils/file_manager.dart';
+import 'package:file_picker/file_picker.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -73,6 +74,53 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
+  Future<void> _saveAliasAndImage(String alias, String? imagePath) async {
+    try {
+      if (Platform.isAndroid) {
+        var status = await Permission.manageExternalStorage.request();
+        if (!status.isGranted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Permiso de almacenamiento denegado')),
+          );
+          return;
+        }
+      }
+
+      final secretKey = await generateSecretKey();
+      String dataToSave = imagePath != null ? '$alias\n$imagePath' : alias;
+      String encryptedData = await encryptData(dataToSave, secretKey);
+
+      String xSessionsPath = await FileManager().getXSessionsPath();
+      File profileFile = File('$xSessionsPath/profile.enc');
+      await profileFile.writeAsString(encryptedData);
+
+      setState(() {
+        _alias = alias;
+        _imagePath = imagePath;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Alias e imagen actualizados exitosamente')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar el alias y la imagen: $e')),
+      );
+    }
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+      if (_alias != null) {
+        _saveAliasAndImage(_alias!, pickedFile.path);
+      }
+    }
+  }
+
   void _navigateToExportSessionPage() {
     Navigator.push(
       context,
@@ -101,6 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
             TextButton(
               child: const Text('Guardar'),
               onPressed: () {
+                _saveAliasAndImage(controller.text, _imagePath);
                 Navigator.of(context).pop();
               },
             ),
@@ -134,10 +183,15 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: <Widget>[
             GestureDetector(
-              onTap: () {},
+              onTap: _pickImage,
               child: CircleAvatar(
                 radius: 50,
-                child: const Icon(Icons.person, size: 50),
+                backgroundImage: _imagePath != null
+                    ? FileImage(File(_imagePath!))
+                    : null,
+                child: _imagePath == null
+                    ? const Icon(Icons.person, size: 50)
+                    : null,
               ),
             ),
             const SizedBox(height: 20),
