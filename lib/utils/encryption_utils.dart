@@ -63,12 +63,18 @@ String encryptSession(String sessionData, Polynomial sharedKey, int mod) {
     encryptedBytes.add(encryptedByte);
   }
 
-  return encryptedBytes.join('-'); // Convertir a una cadena
+  
+        // Fix: Ensure encrypted data is returned as a valid base64 string
+        return base64Encode(utf8.encode(encryptedBytes.join('-')));
+         // Convertir a una cadena
 }
 
 /// Descifra los datos de sesión usando la clave compartida
 String decryptSession(String encryptedData, Polynomial sharedKey, int mod) {
-  List<int> encryptedBytes = encryptedData.split('-').map(int.parse).toList();
+  
+        // Fix: Decode the base64 string into its original encrypted byte list
+        List<int> encryptedBytes = utf8.decode(base64Decode(encryptedData)).split('-').map(int.parse).toList();
+        
   List<int> decryptedBytes = [];
 
   for (int i = 0; i < encryptedBytes.length; i++) {

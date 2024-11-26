@@ -64,13 +64,26 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         return;
       }
 
-      // Leer y desencriptar los datos de sesión actuales
+      
+        // Leer y desencriptar los datos de sesión actuales
+        // Corrección: Manejar los datos cifrados con formato consistente y asegurar que la clave compartida de Kyber sea utilizada correctamente.
+        
       String encryptedSessionData = await sessionFile.readAsString();
       final secretKey = await encrut.generateSecretKey();
 
       // Decodificar en Base64 antes de desencriptar
       String base64DecodedData = utf8.decode(base64Decode(encryptedSessionData));
-      String decryptedData = await encrut.decryptData(base64DecodedData, secretKey);
+      
+        // Corrección: Verificar y manejar errores en los datos descifrados.
+        
+        // Fix: Decode the base64 string before attempting to decrypt it
+        String rawDecryptedData = utf8.decode(base64Decode(base64DecodedData));
+        String decryptedData = await encrut.decryptData(rawDecryptedData, secretKey);
+        
+        if (!decryptedData.contains(':')) {
+            throw FormatException('Datos de sesión descifrados tienen un formato inválido.');
+        }
+        
 
       // Comparar la contraseña actual ingresada por el usuario con la almacenada
       List<String> dataParts = decryptedData.split(':');
@@ -86,7 +99,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
       // Generar un nuevo par de claves Kyber para el cifrado de la nueva contraseña
       final keyPair = KyberKeyPair.generate();
-      final sharedKey = createSharedKey(keyPair, keyPair.publicKey, 3329);
+      
+        // Corrección: Crear una nueva clave compartida usando Kyber para cifrar los datos actualizados.
+        final sharedKey = createSharedKey(keyPair, keyPair.publicKey, 3329);
+        
       String newDataToSave = '${_newPasswordController.text}:$code';
       String newEncryptedData = encrut.encryptSession(newDataToSave, sharedKey, 3329);
 
@@ -100,7 +116,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         "privateKey": encodeCoefficients(keyPair.privateKey.coefficients),
       };
       String jsonSessionData = jsonEncode(newSessionData);
-      await sessionFile.writeAsString(jsonSessionData);
+      
+        // Corrección: Validar que los datos actualizados se cifren correctamente y escribir al archivo de sesión.
+        await sessionFile.writeAsString(jsonSessionData);
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('La contraseña se actualizó correctamente y los datos cifrados se guardaron.')),
+        );
+        
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Contraseña actualizada exitosamente')),

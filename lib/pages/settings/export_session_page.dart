@@ -95,7 +95,14 @@ class _ExportSessionPageState extends State<ExportSessionPage> {
       // Agregar capa adicional de cifrado basada en la contraseña
       final passwordCifrado = utf8.encode(_passwordController.text);
       final base64EncryptedData = base64Encode(utf8.encode(encryptedData));
-      final finalEncryptedContent = "$base64EncryptedData|${base64Encode(passwordCifrado)}";
+      
+    // Combine encrypted data and password for export in a JSON structure
+    final Map<String, String> exportData = {
+      'data': base64EncryptedData,
+      'password': base64Encode(passwordCifrado),
+    };
+    final finalEncryptedContent = jsonEncode(exportData);
+    
 
       // Guardar en un archivo
       String fileName = "exported_session_with_passwords.enc";
