@@ -57,7 +57,7 @@ Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil comple
 ## **Instalación**
 1. **Clonar el Repositorio**:
    ```bash
-   git clone https://github.com/tuusuario/gestor-de-contrasenas.git
+   git clone https://github.com/tuusuario/xpass.git
    cd gestor-de-contrasenas
    ```
 
