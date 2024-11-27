@@ -1,7 +1,7 @@
 name: xpass
 description: "Xpass es una aplicación de gestión de contraseñas."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: '>=3.4.4 <4.0.0'

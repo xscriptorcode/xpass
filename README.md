@@ -8,12 +8,22 @@
 
 ### **1. Gestión de Contraseñas**
 - **Agregar, Editar, Eliminar y Copiar Contraseñas**: Administra tus contraseñas de manera sencilla para diferentes plataformas y servicios.
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="images/opciones.jpg" alt="opciones completas" width="300"/>
+    <img src="images/mod.jpg" alt="modificacion" width="300"/>
+</div>
+
 - **Cifrado Avanzado**: Cada contraseña se cifra de manera segura antes de almacenarse.
-- **Generador de Contraseñas Seguras**: Genera contraseñas aleatorias y robustas para garantizar la seguridad de tus cuentas.
+
+
 
 ### **2. Uso de Criptografía xKyber**
 - **Cifrado y Descifrado Seguro**: Los datos sensibles, como contraseñas y sesiones de usuario, están protegidos con claves generadas mediante xKyber, proporcionando un nivel de seguridad superior.
 - **Claves Compartidas**: Se utiliza xKyber para generar claves compartidas entre las sesiones del usuario, asegurando que los datos se mantengan seguros incluso en entornos no confiables.
+<div style="display: flex; justify-content: center; gap: 10px;">
+   <img src="images/export.jpg" alt="modificacion" width="300"/>
+   <img src="images/criptografia.jpg" alt="contraseñas exportadas" width="300"/>
+</div>
 
 ### **3. Importar y Exportar Contraseñas**
 - **Exportar Contraseñas**:
@@ -23,9 +33,23 @@
   - Restaura tus contraseñas desde un archivo cifrado usando la contraseña que utilizaste para exportarlas.
   - Compatible con múltiples dispositivos y sesiones de usuario.
 - **Cifrado con Contraseña**: Se añade una capa adicional de seguridad al cifrar los datos exportados con una contraseña proporcionada por el usuario.
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="images/export.jpg" alt="Inicio de Sesión" width="200"/>
+    <img src="images/exportf.jpg" alt="Registro Sesión" width="200"/>
+    <img src="images/import.jpg" alt="Configuracion" width="200"/>
+</div>
 
-### **4. Gestión del Perfil del Usuario**
-- **Alias Personalizado**: Configura y edita un alias para personalizar tu experiencia en la aplicación.
+
+### **4. Gestión de sesión y del Perfil del Usuario**
+- **Configura un usuario y una contraseña para iniciar sesión**: Tus datos se almacenarán de forma segura con la información que determines.
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="images/inicio.jpg" alt="Inicio de Sesión" width="200"/>
+    <img src="images/registro.jpg" alt="Registro Sesión" width="200"/>
+    <img src="images/config.jpg" alt="Configuracion" width="200"/>
+</div>
+
+- **Alias Personalizado**: Configura y edita un alias para 
+personalizar tu experiencia en la aplicación.
 - **Foto de Perfil**: Subir y cambiar tu foto de perfil fácilmente desde la galería (esta función está pensada para la implementación de múltiples perfiles en el futuro, por si el usuario desea añadir uno para cada tipo de cuenta que tenga, etc.).
 - **Datos Cifrados**: Toda la información del perfil se guarda de forma segura en archivos cifrados.
 
