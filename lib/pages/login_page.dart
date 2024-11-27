@@ -81,10 +81,10 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () => login(context),
                     ),
                     const SizedBox(height: 10),
-                    MyButton(
-                      text: "Importar archivo de sesión",
-                      onTap: () => navigateToImportSessionPage(context),
-                    ),
+                    //MyButton(
+                    //  text: "Importar archivo de sesión",
+                    //  onTap: () => navigateToImportSessionPage(context),
+                    //),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

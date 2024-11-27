@@ -201,12 +201,12 @@ class _SettingsPageState extends State<SettingsPage> {
               trailing: const Icon(Icons.edit),
               onTap: _editAlias,
             ),
-            ListTile(
-              leading: const Icon(Icons.lock),
-              title: const Text('Contraseña'),
-              trailing: const Icon(Icons.arrow_forward),
-              onTap: _changePassword,
-            ),
+        //    ListTile(
+        //      leading: const Icon(Icons.lock),
+        //      title: const Text('Contraseña'),
+        //      trailing: const Icon(Icons.arrow_forward),
+        //      onTap: _changePassword,
+        //    ),
             SwitchListTile(
               title: const Text('Modo Oscuro'),
               value: isDarkMode,
@@ -215,11 +215,11 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _navigateToExportSessionPage,
-              icon: const Icon(Icons.upload_file),
-              label: const Text('Exportar Archivo de Sesión'),
-            ),
+          //  ElevatedButton.icon(
+          //    onPressed: _navigateToExportSessionPage,
+          //    icon: const Icon(Icons.upload_file),
+          //    label: const Text('Exportar Archivo de Sesión'),
+          //  ),
           ],
         ),
       ),
