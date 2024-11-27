@@ -1,20 +1,19 @@
 # **Xpass**
 
-Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil completa que utiliza criptografía avanzada, incluido **Kyber**, para ofrecer una seguridad de última generación. ¡Ideal para usuarios que buscan mantener sus datos protegidos contra accesos no autorizados!
+¿Te da pereza escribir tus contraseñas en un bloc y tampoco confías en las notas de tu móvil? Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil completa que utiliza criptografía avanzada para almacenarlas de forma segura.
 
 ---
 
 ## **Funciones**
 
 ### **1. Gestión de Contraseñas**
-- **Agregar, Editar y Eliminar Contraseñas**: Administra tus contraseñas de manera sencilla para diferentes plataformas y servicios.
+- **Agregar, Editar, Eliminar y Copiar Contraseñas**: Administra tus contraseñas de manera sencilla para diferentes plataformas y servicios.
 - **Cifrado Avanzado**: Cada contraseña se cifra de manera segura antes de almacenarse.
 - **Generador de Contraseñas Seguras**: Genera contraseñas aleatorias y robustas para garantizar la seguridad de tus cuentas.
 
-### **2. Uso de Criptografía Kyber**
-- **Algoritmo Post-Cuántico**: Kyber es un algoritmo de cifrado resistente a ataques cuánticos, utilizado en la aplicación para generar claves compartidas seguras.
-- **Cifrado y Descifrado Seguro**: Los datos sensibles, como contraseñas y sesiones de usuario, están protegidos con claves generadas mediante Kyber, proporcionando un nivel de seguridad superior.
-- **Claves Compartidas**: Se utiliza Kyber para generar claves compartidas entre las sesiones del usuario, asegurando que los datos se mantengan seguros incluso en entornos no confiables.
+### **2. Uso de Criptografía xKyber**
+- **Cifrado y Descifrado Seguro**: Los datos sensibles, como contraseñas y sesiones de usuario, están protegidos con claves generadas mediante xKyber, proporcionando un nivel de seguridad superior.
+- **Claves Compartidas**: Se utiliza xKyber para generar claves compartidas entre las sesiones del usuario, asegurando que los datos se mantengan seguros incluso en entornos no confiables.
 
 ### **3. Importar y Exportar Contraseñas**
 - **Exportar Contraseñas**:
@@ -27,11 +26,11 @@ Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil comple
 
 ### **4. Gestión del Perfil del Usuario**
 - **Alias Personalizado**: Configura y edita un alias para personalizar tu experiencia en la aplicación.
-- **Foto de Perfil**: Subir y cambiar tu foto de perfil fácilmente desde la galería.
+- **Foto de Perfil**: Subir y cambiar tu foto de perfil fácilmente desde la galería (esta función está pensada para la implementación de múltiples perfiles en el futuro, por si el usuario desea añadir uno para cada tipo de cuenta que tenga, etc.).
 - **Datos Cifrados**: Toda la información del perfil se guarda de forma segura en archivos cifrados.
 
 ### **5. Seguridad Avanzada**
-- **Cifrado AES-256 y Kyber**: Combina algoritmos tradicionales con criptografía post-cuántica para una doble capa de seguridad.
+- **Cifrado AES-256 y xKyber**: Combina algoritmos tradicionales con criptografía post-cuántica para una doble capa de seguridad.
 - **Gestión Segura de Sesiones**: Las sesiones de usuario se administran utilizando claves generadas dinámicamente.
 - **Recuperación Segura**: Permite restaurar datos importando archivos cifrados.
 
@@ -58,7 +57,7 @@ Gestiona y protege tus contraseñas con **Xpass**, una aplicación móvil comple
 1. **Clonar el Repositorio**:
    ```bash
    git clone https://github.com/xscriptorcode/xpass.git
-   xpass
+   cd xpass
    ```
 
 2. **Instalar Dependencias**:
