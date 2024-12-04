@@ -26,8 +26,7 @@ class Polynomial {
     for (int i = 0; i < length; i++) {
       for (int j = 0; j < other.coefficients.length; j++) {
         if (i + j < result.length) {
-          result[i + j] =
-              (result[i + j] + coefficients[i] * other.coefficients[j]) % mod;
+          result[i + j] = (result[i + j] + coefficients[i] * other.coefficients[j]) % mod;
         }
       }
     }
