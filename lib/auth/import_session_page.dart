@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:xpass/crypto/polynomial.dart';
 import 'package:xpass/utils/file_manager.dart';
 import 'package:xpass/utils/encryption_utils.dart';
-import 'package:xpass/crypto/coefficients_codec.dart';
-import 'package:xpass/crypto/kyber_keypair.dart';
-import 'package:xpass/crypto/kyber_logic.dart' as kyber;
+import 'package:xkyber_crypto/polynomial.dart';
+import 'package:xkyber_crypto/coefficients_codec.dart';
+import 'package:xkyber_crypto/kyber_keypair.dart';
+import 'package:xkyber_crypto/kyber_logic.dart' as kyber;
 import 'package:xpass/utils/bd/database_helper.dart';
 import 'package:xpass/pages/password/password.dart';
 

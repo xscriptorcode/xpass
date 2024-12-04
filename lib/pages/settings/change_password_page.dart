@@ -5,10 +5,10 @@ import 'dart:convert'; // Importar dart:convert para jsonEncode y jsonDecode
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xpass/utils/file_manager.dart';
-import 'package:xpass/crypto/kyber_keypair.dart';
-import 'package:xpass/crypto/kyber_logic.dart';
 import 'package:xpass/utils/encryption_utils.dart' as encrut;
-import 'package:xpass/crypto/coefficients_codec.dart';
+import 'package:xkyber_crypto/coefficients_codec.dart';
+import 'package:xkyber_crypto/kyber_logic.dart';
+import 'package:xkyber_crypto/kyber_keypair.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});

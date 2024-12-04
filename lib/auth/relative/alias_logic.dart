@@ -2,8 +2,8 @@
 
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:xpass/crypto/kyber_logic.dart' as kyber;
-import 'package:xpass/crypto/kyber_keypair.dart';
+import 'package:xkyber_crypto/kyber_logic.dart' as kyber;
+import 'package:xkyber_crypto/kyber_keypair.dart';
 
 /// Función para guardar el alias cifrado
 Future<void> saveAlias(String alias, String code) async {

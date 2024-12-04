@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:xpass/utils/file_manager.dart';
 import 'package:xpass/utils/permission_manager.dart';
 import 'package:xpass/pages/password/password_list_screen.dart';
-import 'package:xpass/crypto/kyber_logic.dart';
-import 'package:xpass/crypto/kyber_keypair.dart';
-import 'package:xpass/crypto/polynomial.dart';
-import 'package:xpass/crypto/coefficients_codec.dart';
+import 'package:xkyber_crypto/kyber_logic.dart';
+import 'package:xkyber_crypto/kyber_keypair.dart';
+import 'package:xkyber_crypto/polynomial.dart';
+import 'package:xkyber_crypto/coefficients_codec.dart';
 import 'package:xpass/auth/import_session_page.dart';
 
 Uint8List decodeFromBase64(String base64Str) {

@@ -1,10 +1,9 @@
 // lib/utils/encryption_utils.dart
-
-import 'package:xpass/crypto/kyber_keypair.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
-import 'package:xpass/crypto/polynomial.dart';
+import 'package:xkyber_crypto/polynomial.dart';
+import 'package:xkyber_crypto/kyber_keypair.dart';
 
 /// Genera una clave secreta para el cifrado
 Future<SecretKey> generateSecretKey() async {

@@ -25,12 +25,12 @@ dependencies:
   shared_preferences: ^2.0.13
   image_picker: ^0.8.5+3
   local_auth: ^2.3.0
+  xkyber_crypto: ^1.0.3
     
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.10.0
 
 flutter_icons:
