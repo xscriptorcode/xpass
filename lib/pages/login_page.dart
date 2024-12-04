@@ -1,6 +1,5 @@
-// lib/pages/login_page.dart
-
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart'; 
 import 'package:xpass/components/my_button.dart';
 import 'package:xpass/components/my_textfield.dart';
 import 'package:xpass/auth/login_manager.dart';
@@ -18,15 +17,53 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _codeController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final LoginManager _loginManager = LoginManager();
+  final LocalAuthentication _auth = LocalAuthentication(); // Instancia para autenticación biométrica
 
-  // Método de inicio de sesión
+  bool _isBiometricAvailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkBiometricSupport();
+  }
+
+  // Verifica si la autenticación biométrica está disponible
+  Future<void> _checkBiometricSupport() async {
+    final isAvailable = await _auth.canCheckBiometrics;
+    setState(() {
+      _isBiometricAvailable = isAvailable;
+    });
+  }
+
+  // Método para iniciar sesión
   void login(BuildContext context) {
     _loginManager.login(context, _codeController.text, _passwordController.text);
   }
 
-  // Navegar a la nueva página para importar archivo de sesión
-  void navigateToImportSessionPage(BuildContext context) {
-    _loginManager.navigateToImportSession(context, _codeController.text, _passwordController.text);
+  // Método para autenticación biométrica
+  Future<void> _loginWithBiometrics(BuildContext context) async {
+    try {
+      final didAuthenticate = await _auth.authenticate(
+        localizedReason: 'Por favor, autentícate para iniciar sesión',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+
+      if (didAuthenticate) {
+        // Autenticación exitosa, iniciar sesión
+        _loginManager.loginWithBiometrics(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Autenticación fallida.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al autenticar: $e')),
+      );
+    }
   }
 
   @override
@@ -35,9 +72,9 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16), // Espaciado alrededor del contenido
+          padding: const EdgeInsets.all(16),
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 400),
+            constraints: const BoxConstraints(maxWidth: 400),
             child: Card(
               elevation: 4,
               child: Padding(
@@ -80,11 +117,13 @@ class _LoginPageState extends State<LoginPage> {
                       text: "Iniciar",
                       onTap: () => login(context),
                     ),
-                    const SizedBox(height: 10),
-                    //MyButton(
-                    //  text: "Importar archivo de sesión",
-                    //  onTap: () => navigateToImportSessionPage(context),
-                    //),
+                    if (_isBiometricAvailable) ...[
+                      const SizedBox(height: 20),
+                      MyButton(
+                        text: "Iniciar sesión con huella",
+                        onTap: () => _loginWithBiometrics(context),
+                      ),
+                    ],
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
