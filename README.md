@@ -22,7 +22,6 @@
 - **Claves Compartidas**: Se utiliza xKyber para generar claves compartidas entre las sesiones del usuario, asegurando que los datos se mantengan seguros incluso en entornos no confiables.
 <div style="display: flex; justify-content: center; gap: 10px;">
    <img src="images/export.jpg" alt="modificacion" width="300"/>
-   <img src="images/criptografia.jpg" alt="contraseñas exportadas" width="300"/>
 </div>
 
 ### **3. Importar y Exportar Contraseñas**
