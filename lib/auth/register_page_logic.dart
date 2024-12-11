@@ -9,22 +9,24 @@ import 'package:xkyber_crypto/coefficients_codec.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xpass/utils/encryption_utils.dart' as encrut;
 import 'package:xpass/utils/bd/database_helper.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
+/// Limpia cualquier sesión previa eliminando los datos almacenados y reiniciando la base de datos.
 Future<void> clearPreviousSession() async {
   final fileManager = FileManager();
   final dbHelper = DatabaseHelper();
 
-  // 1. Reinicia la base de datos para eliminar cualquier dato residual
+  // Reinicia la base de datos
   await dbHelper.resetDatabase();
 
-  // 2. Eliminar archivo de sesión si existe
+  // Elimina archivo de sesión si existe
   String sessionFilePath = await fileManager.getVerificationFilePath();
   final sessionFile = File(sessionFilePath);
   if (await sessionFile.exists()) {
     await sessionFile.delete();
   }
 
-  // 3. Eliminar el archivo de perfil `profile.enc` si existe
+  // Elimina el archivo de perfil `profile.enc` si existe
   String xSessionsPath = await fileManager.getXSessionsPath();
   String profileFilePath = '$xSessionsPath/profile.enc';
   final profileFile = File(profileFilePath);
@@ -33,7 +35,9 @@ Future<void> clearPreviousSession() async {
   }
 }
 
-Future<void> saveSessionWithKeys(String dataToSave, KyberKeyPair keyPair, [String? alias]) async {
+/// Guarda una nueva sesión encriptada junto con las claves generadas.
+Future<void> saveSessionWithKeys(
+    String dataToSave, KyberKeyPair keyPair, [String? alias]) async {
   final sharedKey = createSharedKey(keyPair, keyPair.publicKey, 3329);
   String encryptedData = encryptSession(dataToSave, sharedKey, 3329);
 
@@ -62,6 +66,7 @@ Future<void> saveSessionWithKeys(String dataToSave, KyberKeyPair keyPair, [Strin
   await file.writeAsString(jsonSessionData);
 }
 
+/// Guarda el alias de usuario de manera encriptada.
 Future<void> saveAlias(String alias) async {
   final fileManager = FileManager();
   final secretKey = await encrut.generateSecretKey();
@@ -72,6 +77,41 @@ Future<void> saveAlias(String alias) async {
   await profileFile.writeAsString(encryptedAlias);
 }
 
+
+
+Future<void> checkStoragePermission(BuildContext context) async {
+  final deviceInfo = DeviceInfoPlugin();
+  final androidInfo = await deviceInfo.androidInfo;
+  final sdkInt = androidInfo.version.sdkInt;
+
+  // Función auxiliar para mostrar un SnackBar
+  void _showPermissionDeniedSnackBar() {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Permiso de almacenamiento denegado.'),
+      ),
+    );
+  }
+
+  if (sdkInt >= 30) {
+    // Android 11+ (API 30+): MANAGE_EXTERNAL_STORAGE
+    var status = await Permission.manageExternalStorage.request();
+    if (!status.isGranted) {
+      _showPermissionDeniedSnackBar();
+      return;
+    }
+  } else {
+    // Android 10 o anterior: READ/WRITE_EXTERNAL_STORAGE
+    var status = await Permission.storage.request();
+    if (!status.isGranted) {
+      _showPermissionDeniedSnackBar();
+      return;
+    }
+  }
+}
+
+/// Realiza el registro del usuario, incluyendo validaciones, manejo de permisos y generación de claves.
 void register(
   BuildContext context,
   String password,
@@ -80,6 +120,14 @@ void register(
   String? alias,
   void Function()? onTap,
 ) async {
+  if (password.isEmpty || confirmPassword.isEmpty || code.isEmpty) {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Por favor, completa todos los campos')),
+    );
+    return;
+  }
+
   if (password != confirmPassword) {
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -88,16 +136,7 @@ void register(
     return;
   }
 
-  if (Platform.isAndroid) {
-    var status = await Permission.manageExternalStorage.request();
-    if (!status.isGranted) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Permiso de almacenamiento denegado')),
-      );
-      return;
-    }
-  }
+  await checkStoragePermission(context);
 
   try {
     await clearPreviousSession();
