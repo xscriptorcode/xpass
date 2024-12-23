@@ -33,7 +33,7 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
     super.initState();
     if (widget.isEditing && widget.password != null) {
       _nameController.text = widget.password!.name;
-      _userController.text = widget.password!.user ?? '';
+      _userController.text = widget.password!.user;
       _passwordController.text = widget.password!.password;
     }
   }

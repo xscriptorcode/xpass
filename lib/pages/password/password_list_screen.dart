@@ -7,12 +7,11 @@ import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/pages/password/password.dart';
 import 'package:xpass/pages/password/passwords_screen.dart';
 import 'package:xpass/pages/settings/settings_page.dart';
-import 'package:xpass/pages/password/export_passwords_page.dart'; // Nueva página para exportar contraseñas
-import 'package:xpass/pages/password/import_passwords_page.dart'; // Nueva página para importar contraseñas
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpass/auth/login_or_register.dart';
-import 'package:flutter/services.dart'; // Para el portapapeles
-import 'package:cryptography/cryptography.dart'; // Importa cryptography para SecretKey
+import 'package:flutter/services.dart';
+import 'package:xpass/pages/password/create_random_password_screen.dart';
+
 
 class PasswordListScreen extends StatefulWidget {
   const PasswordListScreen({super.key});
@@ -116,12 +115,23 @@ class _PasswordListScreenState extends State<PasswordListScreen> {
           children: <Widget>[
             ListTile(
               leading: const Icon(Icons.lock),
-              title: const Text('Nueva Contraseña'),
+              title: const Text('Guardar Nueva Contraseña'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AddPasswordScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.password),
+              title: const Text('Generar Contraseña Aleatoria'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateRandomPasswordScreen()),
                 );
               },
             ),

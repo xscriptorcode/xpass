@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:xpass/utils/file_manager.dart';
 import 'package:xkyber_crypto/kyber_keypair.dart';
 import 'package:xkyber_crypto/kyber_logic.dart';

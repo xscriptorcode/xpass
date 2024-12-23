@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.0.2] - 2024-12-04
+## [1.0.3] - 2024-12-04
+### Update
+- Update code generator, random password integration, delete redundancies, bug fixed about notes inside password.
+
+## [1.0.3] - 2024-12-04
 ### Update
 - Update dependences-pubcpec, replace pointcastle and another criptography lib, because are integrated on xkyber_crypto.
 - Update AndroidManifest.xml for permissions

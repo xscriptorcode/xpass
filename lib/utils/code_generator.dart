@@ -18,22 +18,34 @@ class CodeGenerator {
     'ya', 'ye', 'yi', 'yo', 'yu', 'za', 'ze', 'zi', 'zo', 'zu'
   ];
 
-  // Método para generar una palabra de tres sílabas
-  static String _generateWord() {
-    return syllables[_random.nextInt(syllables.length)] +
-           syllables[_random.nextInt(syllables.length)] +
-           syllables[_random.nextInt(syllables.length)];
+   static const specialChars = ['#', '*', '&', '@', '%', '!', '^', '+', '_', '-'];
+  // Método para generar una palabra de cinco sílabas
+  static String _generateWord(int syllableCount) {
+    return List.generate(syllableCount, (_) => syllables[_random.nextInt(syllables.length)])
+        .join();
   }
 
   // Método para generar el código de acceso
   static String generateAccessCode() {
-    // Generar una palabra de tres sílabas
-    String word = _generateWord();
+    // Generar dos palabras de cinco sílabas cada una
+    String word1 = _generateWord(5);
+    String word2 = _generateWord(5);
 
-    // Generar un número aleatorio entre 1000 y 9999
-    final number = _random.nextInt(9000) + 1000;
+    // Concatenar las palabras
+    String combined = '$word1$word2';
 
-    // Concatenar la palabra y el número
-    return '$word$number';
+    // Elegir uno o dos caracteres especiales
+    int specialCharCount = _random.nextBool() ? 1 : 2;
+    List<String> specialCharsList = List.generate(specialCharCount, (_) => specialChars[_random.nextInt(specialChars.length)]);
+
+    // Insertar caracteres especiales en posiciones completamente aleatorias
+    List<String> characters = combined.split(''); // Dividir la cadena en caracteres individuales
+    for (String specialChar in specialCharsList) {
+      int randomIndex = _random.nextInt(characters.length + 1); // Elegir índice aleatorio
+      characters.insert(randomIndex, specialChar); // Insertar el carácter especial
+    }
+
+    // Reconstruir la cadena final
+    return characters.join();
   }
 }

@@ -5,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:crypto/crypto.dart'; // Para SHA-256
 import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/utils/bd/database_helper.dart';
-import 'package:xpass/pages/password/password.dart';
 import 'package:cryptography/cryptography.dart'; // Importa cryptography para SecretKey
 
 class ExportPasswordsPage extends StatefulWidget {

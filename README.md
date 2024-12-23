@@ -25,6 +25,7 @@
 </div>
 
 ### **3. Importar y Exportar Contraseñas**
+**Esta función usa el permiso de almacenamiento absoluto para que el usuario pueda exportar sus contraseñas y notas de forma segura en cualquier parte del dispositivo (En caso de que quiera migrar o actualizar).**
 - **Exportar Contraseñas**:
   - Exporta tus contraseñas cifradas a un archivo protegido por contraseña.
   - Selecciona un directorio para guardar tus contraseñas cifradas.

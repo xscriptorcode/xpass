@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:xpass/pages/settings/change_password_page.dart';
-import 'package:xpass/pages/settings/export_session_page.dart';
 import 'package:xpass/themes/theme_provider.dart';
 import 'package:xpass/utils/encryption_utils.dart';
 import 'package:xpass/utils/file_manager.dart';
-import 'package:file_picker/file_picker.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -121,13 +118,6 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  void _navigateToExportSessionPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ExportSessionPage()),
-    );
-  }
-
   void _editAlias() {
     final controller = TextEditingController(text: _alias);
     showDialog(
@@ -156,13 +146,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         );
       },
-    );
-  }
-
-  void _changePassword() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
     );
   }
 
@@ -201,12 +184,6 @@ class _SettingsPageState extends State<SettingsPage> {
               trailing: const Icon(Icons.edit),
               onTap: _editAlias,
             ),
-        //    ListTile(
-        //      leading: const Icon(Icons.lock),
-        //      title: const Text('Contraseña'),
-        //      trailing: const Icon(Icons.arrow_forward),
-        //      onTap: _changePassword,
-        //    ),
             SwitchListTile(
               title: const Text('Modo Oscuro'),
               value: isDarkMode,
@@ -215,11 +192,6 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             const SizedBox(height: 20),
-          //  ElevatedButton.icon(
-          //    onPressed: _navigateToExportSessionPage,
-          //    icon: const Icon(Icons.upload_file),
-          //    label: const Text('Exportar Archivo de Sesión'),
-          //  ),
           ],
         ),
       ),

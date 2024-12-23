@@ -10,7 +10,6 @@ import 'package:xkyber_crypto/kyber_logic.dart';
 import 'package:xkyber_crypto/kyber_keypair.dart';
 import 'package:xkyber_crypto/polynomial.dart';
 import 'package:xkyber_crypto/coefficients_codec.dart';
-import 'package:xpass/auth/import_session_page.dart';
 
 Uint8List decodeFromBase64(String base64Str) {
   List<int> coefficients = decodeCoefficients(base64Str);
@@ -64,10 +63,6 @@ class LoginManager {
       return;
     }
 
-    final savedPassword = savedData[0];
-    final savedCode = savedData[1];
-
-    // Asume que la autenticación biométrica ya fue exitosa, inicia sesión directamente
     _showSnackBar(context, 'Inicio de sesión exitoso con biometría');
     Navigator.push(
       context,
@@ -139,18 +134,7 @@ class LoginManager {
     }
   }
 
-  // Navegar a la página de importar sesión y pasar el código y contraseña de inicio de sesión
-  void navigateToImportSession(BuildContext context, String code, String password) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ImportSessionPage(
-          loginCode: code,
-          loginPassword: password,
-        ),
-      ),
-    );
-  }
+
 
   void _showSnackBar(BuildContext context, String message) {
     if (context.mounted) {
